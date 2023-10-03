@@ -10,7 +10,10 @@ function summ(a) {
     }
     const x = Object.keys(a).map((k) => {
         const elem = a[k];
-        if (typeof elem === undefined) {
+        if (!elem || typeof elem === undefined) {
+            return 2022;
+        }
+        if (typeof elem.cvalue === 'undefined') {
             return 2022;
         }
         if (typeof elem.cvalue === 'object') {
@@ -18,9 +21,6 @@ function summ(a) {
         }
         if (typeof elem.cvalue === 'string') {
             return +elem.cvalue || 2022;
-        }
-        if (typeof elem.cvalue === 'undefined') {
-            return 2022;
         }
         return elem.cvalue;
     });
@@ -40,11 +40,7 @@ let result = summ({
     world: {
         cvalue: {
             yay: {
-                cvalue: {
-                    yay: {
-                        cvalue: "2"
-                    }
-                }
+                cvalue: "2"
             }
         }
     }

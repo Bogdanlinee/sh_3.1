@@ -23,15 +23,20 @@ type ConfirmationHandlingFormButton = {
 // Task 3 ============================================================
 //====================================================================
 
-function summ(a: SumType2) {
+function summ(a: SumType1) {
     if (!a) {
         return 2022;
     }
 
     const x = Object.keys(a).map((k) => {
         const elem = a[k];
-        if (typeof elem === undefined) {
+
+        if (!elem || typeof elem === undefined) {
             return 2022;
+        }
+
+        if (typeof elem.cvalue === 'undefined') {
+            return 2022
         }
 
         if (typeof elem.cvalue === 'object') {
@@ -42,9 +47,6 @@ function summ(a: SumType2) {
             return +elem.cvalue || 2022;
         }
 
-        if (typeof elem.cvalue === 'undefined') {
-            return 2022;
-        }
 
         return elem.cvalue;
     });
@@ -59,15 +61,12 @@ function summ(a: SumType2) {
         sum += x[i];
     }
 
-    return sum
+    return sum;
 }
 
 type SumType1 = {
-    cvalue?: string | number | undefined | SumType1,
-    [key: string]: SumType1,
+    [a: string]: { cvalue: number | string | undefined | SumType1 } | undefined;
 };
-
-type SumType2 = SumType1 | undefined;
 
 let result = summ({
     hello: {
@@ -76,11 +75,7 @@ let result = summ({
     world: {
         cvalue: {
             yay: {
-                cvalue: {
-                    yay: {
-                        cvalue: "2"
-                    }
-                }
+                cvalue: "2"
             }
         }
     }
