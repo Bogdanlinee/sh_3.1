@@ -45,4 +45,12 @@ let result = summ({
         }
     }
 });
-console.log({ result });
+function mapObject(obj, transformer) {
+    const resultArr = {};
+    for (const elem in obj) {
+        resultArr[elem] = transformer(obj[elem]);
+    }
+    return resultArr;
+}
+const resultTask3 = mapObject({ "roma": 5, "vasya": 2 }, (x) => x > 2);
+console.log(resultTask3);

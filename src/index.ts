@@ -7,7 +7,6 @@ interface FormButton {
     type: 'Add' | 'Remove' | 'Buy';
 }
 
-
 type AnyButtonType = DialogButtonType | FormButton['type'];
 
 
@@ -81,7 +80,34 @@ let result = summ({
     }
 });
 
-console.log({result});
+// Task 4 ============================================================
+//====================================================================
+
+// Понятное дело для описания сигнатуры mapObject надо будет юзать
+// 1) дженерики с несколькими параметрами-типами
+// 2) такую штуку как Record (globalThis.Record, если быть точным ;) )
+
+
+type ObjectType = string;
+
+function mapObject<InputType, OutputType>(obj: Record<ObjectType, InputType>, transformer: (arg: InputType) => OutputType) {
+    const resultArr: Record<ObjectType, OutputType> = {}
+
+    for (const elem in obj) {
+        resultArr[elem] = transformer(obj[elem]);
+    }
+
+    return resultArr;
+}
+
+const resultTask3 = mapObject(
+        {"roma": 5, "vasya": 2},
+        (x) => x > 2
+    )
+;
+
+console.log(resultTask3);
+
 
 
 
