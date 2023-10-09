@@ -53,4 +53,29 @@ function mapObject(obj, transformer) {
     return resultArr;
 }
 const resultTask3 = mapObject({ "roma": 5, "vasya": 2 }, (x) => x > 2);
-console.log(resultTask3);
+// console.log(resultTask3);
+// Task 5 ============================================================
+//====================================================================
+function f2(arg, callback) {
+    return callback(arg);
+}
+// Task 6 ============================================================
+//====================================================================
+// Последняя задача:
+// Напишите сигнатуру функции, которая принимает
+// - некий класс
+// - количество
+// ...а возвращает массив экземпляров этого класса
+class Rectangle {
+}
+class Circle {
+}
+function наштамповать(SOMECLASS, count) {
+    let a = [];
+    for (let i = 0; i < count; i++) {
+        a.push(new SOMECLASS());
+    }
+    return a;
+}
+let a6 = наштамповать(Rectangle, 10);
+let b6 = наштамповать(Circle, 20);

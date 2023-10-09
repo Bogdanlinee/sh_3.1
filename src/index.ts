@@ -83,11 +83,6 @@ let result = summ({
 // Task 4 ============================================================
 //====================================================================
 
-// Понятное дело для описания сигнатуры mapObject надо будет юзать
-// 1) дженерики с несколькими параметрами-типами
-// 2) такую штуку как Record (globalThis.Record, если быть точным ;) )
-
-
 type ObjectType = string;
 
 function mapObject<InputType, OutputType>(obj: Record<ObjectType, InputType>, transformer: (arg: InputType) => OutputType) {
@@ -106,9 +101,43 @@ const resultTask3 = mapObject(
     )
 ;
 
-console.log(resultTask3);
+// console.log(resultTask3);
 
+// Task 5 ============================================================
+//====================================================================
 
+function f2<T>(arg: Partial<T>, callback: (arg: Partial<T>) => T) {
+    return callback(arg);
+}
+
+// Task 6 ============================================================
+//====================================================================
+
+// Последняя задача:
+// Напишите сигнатуру функции, которая принимает
+// - некий класс
+// - количество
+// ...а возвращает массив экземпляров этого класса
+
+class Rectangle {
+    w!: number;
+    h!: number;
+}
+
+class Circle {
+    radius!: number;
+}
+
+function наштамповать<T, T2 extends { new(): T }>(SOMECLASS: T2, count: number): T[] {
+    let a: T[] = []
+    for (let i = 0; i < count; i++) {
+        a.push(new SOMECLASS());
+    }
+    return a;
+}
+
+let a6: Rectangle[] = наштамповать(Rectangle, 10);
+let b6: Circle[] = наштамповать(Circle, 20);
 
 
 
